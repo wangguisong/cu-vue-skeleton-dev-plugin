@@ -70,7 +70,8 @@ Object.defineProperty(window, 'skeleton_cancel', {
 function skeletonText (element) {
   var fill = '▇'
   if (element.style) {
-    element.style.color = 'gray'
+    element.style.color = 'lightgray'
+    element.style.borderColor = 'lightgray'
     element.style.letterSpacing = '-1px'
     element.style.backgroundImage = 'none'
   }
@@ -91,7 +92,8 @@ function skeletonInput () {
   for (var i=0; i < inputList.length; i++) {
     var element = inputList[i]
     if (element.style) {
-      element.style.color = 'gray'
+      element.style.color = 'lightgray'
+      element.style.borderColor = 'lightgray'
       element.style.overflow = 'hidden'
       element.style.letterSpacing = '-1px'
     }

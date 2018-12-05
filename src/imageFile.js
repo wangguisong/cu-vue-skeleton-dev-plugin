@@ -70,7 +70,7 @@ function generateSkeletonImage (filename) {
       gm(tmpPath)
         .colorspace('GRAY')
         .setFormat('JPEG')
-        .quality(2)
+        .quality(10)
         .write(destPath, e => {
           if (e) {
             console.log('[generateSkeletonImage error]',e.message)
