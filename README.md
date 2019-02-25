@@ -32,3 +32,8 @@ config.plugins.push(new SkeletonPlugin(config))
 -  skeleton 生成骨架图
 -  skeleton_index 生成首屏骨架图
 -  skeleton_cancel 取消骨架预处理效果
+
+## 开发
+```
+npm run serve
+```

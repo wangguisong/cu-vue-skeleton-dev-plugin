@@ -1,18 +1,19 @@
 const { exec } = require('child_process')
 const fs = require('fs')
 const path = require('path')
-const globalOptions = require('./src/options')
+const globalOptions = require('./options')
 
 class CuVueSkeletonPlugin {
 
   constructor (options) {
+    console.log(options)
     Object.assign(globalOptions, options)   
     if (process.env.NODE_ENV === 'development') {
       if (!globalOptions.skeletonImageDir) {
         console.error('option skeletonImageDir is required')
       }
       // 启动websocket server
-      this.wsProcess = exec(`node ${__dirname}/src/ws/server.js --output ${globalOptions.skeletonImageDir} --template ${globalOptions.templatePath} --container ${globalOptions.mountId}`)
+      this.wsProcess = exec(`node ${__dirname}/ws/server.js --output ${globalOptions.skeletonImageDir} --template ${globalOptions.templatePath} --container ${globalOptions.mountId}`)
 
       this.wsProcess.stdout.on('data', data => {
         console.log(`[ws] ${data}`)
@@ -34,11 +35,11 @@ class CuVueSkeletonPlugin {
         let tplName = path.basename(globalOptions.templatePath)
         if (compilation.assets[tplName]) {
           let indexContent = compilation.assets[tplName].source()
-          let wsScript = fs.readFileSync(`${__dirname}/src/ws/client.js`)
+          let wsScript = fs.readFileSync(`${__dirname}/ws/client.js`)
           indexContent = indexContent + `<script>${wsScript}</script>`
-          let html2canvasScript = fs.readFileSync(`${__dirname}/src/html2canvas.js`)
+          let html2canvasScript = fs.readFileSync(`${__dirname}/html2canvas.js`)
           indexContent = indexContent + `<script>${html2canvasScript}</script>`
-          let commandScript = fs.readFileSync(`${__dirname}/src/command.js`)
+          let commandScript = fs.readFileSync(`${__dirname}/command.js`)
           indexContent = indexContent + `<script>${commandScript}</script>`
           compilation.assets[tplName] = {
             source () {
